@@ -65,17 +65,18 @@ var readData = function(id, callback){
             {
                 // Read all rows from table
                 var request = new Request(
-                    "SELECT * FROM SaveData WHERE id=@id",
+                    "SELECT * FROM SaveCal WHERE id=@id",
                     function(err, rowCount, rows) 
                         {
                             var respond = new Array();
                             for(var i = 0;i < rows.length; i ++){
+                                var obj = JSON.parse(rows[i][1].value);
                                 respond.push({
                                     id : rows[i][0].value
-                                    ,a : rows[i][1].value
-                                    ,b : rows[i][1].value
-                                    ,operaion : rows[i][1].value
-                                    ,result : rows[i][1].value
+                                    ,a : obj.a
+                                    ,b : obj.b
+                                    ,operaion : obj.operation
+                                    ,result : obj.result
                                 });
                             }
                             callback(respond);
@@ -98,20 +99,23 @@ var insertData = function(id, a, b, operation, result, callback){
             }
         else
             {
-                request = new Request("INSERT SaveData (id, a, b, operation, result) VALUES (@id, @a, @b, @operation, @result);"
+                var storageData = {
+                    a : a,
+                    b : a,
+                    operation : operation,
+                    result : result
+                }
+                request = new Request("INSERT SaveCal (id, data) VALUES (@id, @data);"
                 , function(err) {  
                     if (err) {  
                         console.log(err);}  
                     });
                 request.addParameter('id', TYPES.VarChar, id);  
-                request.addParameter('a', TYPES.Int , a);
-                request.addParameter('a', TYPES.Int , b);
-                request.addParameter('a', TYPES.Varchar , a);
-                request.addParameter('a', TYPES.Int , result);
+                request.addParameter('data', TYPES.VarChar , JSON.stringify(storageData));
                 request.on('done', function (rowCount, more, rows) { 
                     callback('done');
                 });
-                connection.execSql(request); 
+                connection.execSql(request);
             }
         }
     );
@@ -127,16 +131,19 @@ var updateData = function(id, a, b, operation, result){
            }
        else
            {
-               request = new Request("UPDATE SaveData SET a=@a, b=@b, operation=@operation, result=@result WHERE id=@id;"
+               var storageData = {
+                    a : a,
+                    b : a,
+                    operation : operation,
+                    result : result
+                }
+               request = new Request("UPDATE SaveCal SET data=@data WHERE id=@id;"
                , function(err) {  
                    if (err) {  
                        console.log(err);}  
                    });
-               request.addParameter('id', TYPES.VarChar, id);  
-               request.addParameter('a', TYPES.Int , a);
-               request.addParameter('a', TYPES.Int , b);
-               request.addParameter('a', TYPES.Varchar , a);
-               request.addParameter('a', TYPES.Int , result);
+                request.addParameter('id', TYPES.VarChar, id);  
+                request.addParameter('data', TYPES.VarChar , JSON.stringify(storageData));
                request.on('done', function (rowCount, more, rows) { 
                    callback('done');
                });
