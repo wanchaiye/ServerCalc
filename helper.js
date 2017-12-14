@@ -101,7 +101,7 @@ var insertData = function(id, a, b, operation, result, callback){
             {
                 var storageData = {
                     a : a,
-                    b : a,
+                    b : b,
                     operation : operation,
                     result : result
                 }
@@ -133,7 +133,7 @@ var updateData = function(id, a, b, operation, result){
            {
                var storageData = {
                     a : a,
-                    b : a,
+                    b : b,
                     operation : operation,
                     result : result
                 }
