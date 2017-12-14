@@ -75,7 +75,7 @@ var readData = function(id, callback){
                                     id : rows[i][0].value
                                     ,a : obj.a
                                     ,b : obj.b
-                                    ,operaion : obj.operation
+                                    ,operation : obj.operation
                                     ,result : obj.result
                                 });
                             }
