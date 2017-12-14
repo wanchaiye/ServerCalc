@@ -42,13 +42,8 @@ app.get('/uploaddata/:id/:a/:b/:operation/:result', function(req, res) {
 });
 
 function findStoreCallIndex(id){
-    // console.log("ID : "+id);
-    // console.log(JSON.stringify(storeCal));
     for(var i = 0;i < storeCal.length;i++){
         if(storeCal[i].id == id){
-            // console.log("i : "+i+" ,"+storeCal.length);
-            // console.log(JSON.stringify(storeCal[i]));
-            // console.log(JSON.stringify(storeCal));
             return i;
         }
     }
