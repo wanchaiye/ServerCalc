@@ -20,15 +20,15 @@ app.get('/getdata/:id', (req, res) =>{
     });
 });
 
-app.get('/uploaddata/:id/:calc/:isFirst', function(req, res) {
+app.get('/uploaddata/:id/:a/:b/:operation/:result/:isFirst', function(req, res) {
     // Include the public functions from 'helpers.js'
     var helper = require('./helper');
     if(req.params.isFirst == 'true'){
-        helper.insertCalc(req.params.id, req.params.calc, function(data){
+        helper.insertCalc(req.params.id, req.params.a, req.params.b, req.params.operation, req.params.result, function(data){
             res.send(data);
         });  
     }else{
-        helper.updateCalc(req.params.id, req.params.calc, function(data){
+        helper.updateCalc(req.params.id, req.params.a, req.params.b, req.params.operation, req.params.result, function(data){
             res.send(data);
         }); 
     }
