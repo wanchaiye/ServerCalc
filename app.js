@@ -15,7 +15,7 @@ app.get('/getdata/:id', (req, res) =>{
     }
     var helper = require('./helper');
     
-    helper.getCalcFromId('bank', function(data){
+    helper.getCalcFromId(req.params.id, function(data){
         res.send(data);
     });
 });

@@ -65,7 +65,7 @@ var readData = function(id, callback){
             {
                 // Read all rows from table
                 var request = new Request(
-                    "SELECT * FROM SaveCal",
+                    "SELECT * FROM SaveCal WHERE id=@id",
                     function(err, rowCount, rows) 
                         {
                             var respond = new Array();
@@ -75,6 +75,7 @@ var readData = function(id, callback){
                             callback(respond);
                         }
                     );
+                request.addParameter('id', TYPES.VarChar, id);  
                 connection.execSql(request);
             }
         }
