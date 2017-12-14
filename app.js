@@ -25,6 +25,7 @@ app.get('/getdata/:id', (req, res) =>{
 app.get('/uploaddata/:id/:a/:b/:operation/:result', function(req, res) {
     var findIndex = findStoreCallIndex(req.params.id);
     if(req.params.operation == 'slash') req.params.operation = '/';
+    if(req.params.operation == 'plus') req.params.operation = '+';
     var storageData = {
         id: req.params.id,
         a : req.params.a,
