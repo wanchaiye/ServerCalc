@@ -4,11 +4,15 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "wanchai yeung",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.2"
+    "async": "^2.6.0",
+    "express": "^4.16.2",
+    "mysql2": "^1.5.1",
+    "tedious": "^2.1.5"
   }
 }
